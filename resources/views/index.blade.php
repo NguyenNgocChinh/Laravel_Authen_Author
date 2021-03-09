@@ -27,28 +27,39 @@
                 <td>{{ $prod->name }}</td>
                 <td>{{$prod->price}}</td>
                 <td>
-                    <button class="btn btn-primary"><a href="{{route('product.show', $prod->id)}}"
-                                                       class="text-white text-decoration-none">Show</a></button>
-                    <button class="btn btn-success"><a href="{{route('product.edit', $prod->id)}}"
-                                                       class="text-white text-decoration-none">Edit</a></button>
-                    <form action="{{route('product.destroy', $prod->id)}}" method="post" style="display: inline-block">
-                        @csrf
-                        @method('delete')
-                        <button class="btn btn-danger">Delete</button>
-                    </form>
+                    @can('show-product', \Illuminate\Support\Facades\Auth::user())
+                        <button class="btn btn-primary">
+                            <a href="{{route('product.show', $prod->id)}}" class="text-white text-decoration-none">Show</a>
+                        </button>
+                    @endcan
+
+                    @can('edit-product',\Illuminate\Support\Facades\Auth::user())
+                        <button class="btn btn-success">
+                            <a href="{{route('product.edit', $prod->id)}}"class="text-white text-decoration-none">Edit</a>
+                        </button>
+                    @endcan
+
+                    @can('delete-product',\Illuminate\Support\Facades\Auth::user())
+                        <form action="{{route('product.destroy', $prod->id)}}" method="post" style="display: inline-block">
+                            @csrf
+                            @method('delete')
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+                    @endcan
                 </td>
             </tr>
         @endforeach
         </tbody>
     </table>
-
-    <button class="btn btn-info rounded-circle text-white font-weight-bold"
-            style="position: fixed; bottom: 15px; right:25px;height: 50px; width: 50px; " data-bs-toggle="modal"
-            data-bs-target="#addproduct">
-        <div style="position:relative;">
-            <span style="position: absolute; top: -22px; left: 3px; font-size: 26px">+</span>
-        </div>
-    </button>
+    @can('add-product',\Illuminate\Support\Facades\Auth::user())
+        <button class="btn btn-info rounded-circle text-white font-weight-bold"
+                style="position: fixed; bottom: 15px; right:25px;height: 50px; width: 50px; " data-bs-toggle="modal"
+                data-bs-target="#addproduct">
+            <div style="position:relative;">
+                <span style="position: absolute; top: -22px; left: 3px; font-size: 26px">+</span>
+            </div>
+        </button>
+    @endcan
 
     <!-- Modal -->
     <div class="modal fade" id="addproduct" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -85,5 +96,6 @@
             </div>
         </form>
     </div>
+
 
 @endsection

@@ -41,4 +41,30 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function permission(){
+        return $this->belongsToMany(Permission::class,'user-permission','userId','permissionId');
+    }
+
+    public function group(){
+        return $this->belongsToMany(Group::class, 'user-group','userId','groupId');
+    }
+
+    public function hasAccess($permission_name) : bool
+    {
+        foreach ($this->permission()->get() as $permission)
+        {
+            if ($permission->name == $permission_name)
+                return true;
+        }
+        foreach ($this->group()->get() as $group)
+        {
+            foreach ($group->permission()->get() as $permission) {
+                if ($permission->name == $permission_name)
+                    return true;
+            }
+        }
+
+        return false;
+    }
 }

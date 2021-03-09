@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class SeederRole extends Seeder
+class SeederGroup extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,9 +14,9 @@ class SeederRole extends Seeder
      */
     public function run()
     {
-        $arr = ['gest','employee','admin'];
+        $arr = ['gest','user','admin'];
         for ($i = 0; $i<= 2; $i++){
-            DB::table('roles')->insert([
+            DB::table('group')->insert([
                 'name' => $arr[$i]
             ]);
         }

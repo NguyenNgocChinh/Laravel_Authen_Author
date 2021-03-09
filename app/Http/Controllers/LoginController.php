@@ -21,10 +21,13 @@ class LoginController extends Controller
         $username = $request->username;
         $password = $request->password;
 
+
         if (filter_var($request->username, FILTER_VALIDATE_EMAIL))
             Auth::attempt(['email' => $username, 'password' => $password]);
         else
             Auth::attempt(['username' => $username, 'password' => $password]);
+
+
         if (Auth::check()) {
             $request->session()->regenerate();
 
