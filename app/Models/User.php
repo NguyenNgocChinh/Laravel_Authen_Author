@@ -67,4 +67,14 @@ class User extends Authenticatable
 
         return false;
     }
+
+    public function hasAccessAdmin() : bool
+    {
+        foreach ($this->group()->get() as $group)
+        {
+            if ($group->name == 'admin')
+                return true;
+        }
+        return false;
+    }
 }

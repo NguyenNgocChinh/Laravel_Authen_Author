@@ -20,6 +20,7 @@ class SeederProduct extends Seeder
                 'name' => 'San pham thu ' . $i,
                 'price' => rand(0,100),
                 'description' => 'Day la noi dung',
+                'userId' => rand(1,3),
             ]);
         }
     }

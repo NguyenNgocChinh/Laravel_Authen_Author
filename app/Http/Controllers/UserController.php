@@ -53,6 +53,7 @@ class UserController extends Controller
         ]);
 
         $request->offsetSet('password',  ($request->password));
+
         $result = User::create($request->all());
 
         foreach ($request->group as $group)

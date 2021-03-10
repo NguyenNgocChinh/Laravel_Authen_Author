@@ -18,7 +18,8 @@ class CreateProductTable extends Migration
             $table->string('name');
             $table->double('price');
             $table->string('description');
-            $table->timestamps();
+            $table->unsignedBigInteger('userId');
+            $table->foreign('userId')->on('users')->references('id');
         });
     }
 

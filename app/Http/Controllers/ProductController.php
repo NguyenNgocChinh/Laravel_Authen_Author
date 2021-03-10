@@ -64,6 +64,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
+        $product = Product::find($id);
+        $this->authorize('update', $product);
+
         return view('Product.edit', ['id' => $id]);
 
     }
@@ -77,7 +80,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**

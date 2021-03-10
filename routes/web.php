@@ -17,11 +17,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource( 'product',ProductController::class);
+Route::resource('product', ProductController::class);
 Route::resource('user', UserController::class);
-Route::get('/', function (){
+Route::get('/', function () {
     return redirect('/product');
 });
+
+Route::prefix('admin')->middleware('admin')->group(function () {
+    Route::get('/', function () {
+        return view('Admin.index');
+    })->name('admin');
+});
+
 
 Route::get('/login', [LoginController::class, 'show']);
 Route::post('/login', [LoginController::class, 'login'])->name('login');

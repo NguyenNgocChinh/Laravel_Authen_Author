@@ -27,6 +27,9 @@
                     <span class="btn rounded mx-3"> Name:
                         {{\Illuminate\Support\Facades\Auth::user()->name}}
                     </span>
+                    @can('admin')
+                        <a class="btn btn-outline-danger mx-3" href="{{route('admin')}}">Admin Page</a>
+                    @endcan
                     <a class="btn btn-outline-danger" href="{{route('logout')}}">logout</a>
                 </div>
             @else

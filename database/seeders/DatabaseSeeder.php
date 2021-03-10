@@ -17,12 +17,12 @@ class DatabaseSeeder extends Seeder
         //User::factory(10)->create();
         $this->call([
             UserSeeder::class,
-            SeederProduct::class,
             SeederPermission::class,
             SeederGroup::class,
             SeederUserPermission::class,
             SeederUserGroup::class,
-            GroupPermissionSeeder::class
+            GroupPermissionSeeder::class,
+            SeederProduct::class,
         ]);
     }
 }
